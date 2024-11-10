@@ -3,7 +3,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 export interface ITask extends Document {
   title: string;
   content: string;
-  author: string;
+  status: 'pending' | 'in-progress' | 'completed'
   createdAt: Date;
   updatedAt: Date;
 }
