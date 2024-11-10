@@ -18,7 +18,7 @@ const TaskSchema = new Schema({
     type: String,
     required: true
   },
-  author: {
+  status: {
     type: String,
     required: true
   },

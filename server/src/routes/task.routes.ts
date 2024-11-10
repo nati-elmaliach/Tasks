@@ -6,50 +6,53 @@ const router = Router();
 // Create a new task
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const post: ITask = await Task.create(req.body);
-    res.status(201).json(post);
+    console.log(req.body)
+    const task: ITask = await Task.create(req.body);
+    res.status(201).json(task);
   } catch (error) {
-    res.status(400).json({ error: 'Failed to create post' });
+    console.log(error)
+    res.status(400).json({ error: 'Failed to create task' });
   }
 });
 
 // Get all Tasks
 router.get('/', async (_req: Request, res: Response) => {
   try {
-    const posts: ITask[] = await Task.find().sort({ createdAt: -1 });
-    res.json(posts);
+    const tasks: ITask[] = await Task.find().sort({ createdAt: -1 });
+    res.json(tasks);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch posts' });
+    res.status(500).json({ error: 'Failed to fetch tasks' });
   }
 });
 
 // Get task by ID
 router.get('/:id', async (req: Request, res: Response) => {
   try {
-    const post = await Task.findById(req.params.id);
-    if (!post) {
-      return res.status(404).json({ error: 'Post not found' });
+    const task = await Task.findById(req.params.id);
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
     }
-    res.json(post);
+    res.json(task);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch post' });
+    res.status(500).json({ error: 'Failed to fetch task' });
   }
 });
 
 // Update task
 router.put('/:id', async (req: Request, res: Response) => {
+  console.log(req.body)
   try {
-    const post = await Task.findByIdAndUpdate(
+    const task = await Task.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true, runValidators: true }
     );
-    if (!post) {
-      return res.status(404).json({ error: 'Post not found' });
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
     }
-    res.json(post);
+    res.json(task);
   } catch (error) {
-    res.status(400).json({ error: 'Failed to update post' });
+    res.status(400).json({ error: 'Failed to update task' });
   }
 });
 

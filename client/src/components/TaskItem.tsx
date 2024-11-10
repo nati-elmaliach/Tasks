@@ -30,7 +30,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onStatusChan
     <div className={`p-4 rounded-lg border-2 ${statusColors[task.status]} mb-4`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <button onClick={() => onStatusChange(task.id)}>
+          <button onClick={() => onStatusChange(task._id)}>
             <StatusIcon />
           </button>
           <div>
@@ -39,7 +39,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onStatusChan
           </div>
         </div>
         <button
-          onClick={() => onDelete(task.id)}
+          onClick={() => onDelete(task._id)}
           className="text-red-500 hover:text-red-700 transition-colors"
         >
           <Trash2 size={20} />

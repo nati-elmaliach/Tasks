@@ -1,5 +1,5 @@
 export interface ITask {
-    id: string;
+    _id: string;
     title: string;
     content: string;
     status: 'pending' | 'in-progress' | 'completed';

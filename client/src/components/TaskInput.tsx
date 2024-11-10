@@ -3,7 +3,7 @@ import { PlusCircle } from 'lucide-react';
 import { NewTask } from '../types/task' 
 
 interface TaskInputProps {
-  onAdd: (task: NewTask) => void;
+  onAdd: (task: NewTask) => Promise<void>;
 }
 
 export const TaskInput: React.FC<TaskInputProps> = ({ onAdd }) => {
@@ -11,24 +11,13 @@ export const TaskInput: React.FC<TaskInputProps> = ({ onAdd }) => {
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (title.trim().length < 3) {
-      setError('Title must be at least 3 characters long');
-      return;
+    try {
+        await onAdd({ title: title.trim(), content: content.trim(), status: 'pending'});    
+    } catch (error) {
+        console.log(error)
     }
-    
-    if (content.trim().length < 5) {
-      setError('Content must be at least 5 characters long');
-      return;
-    }
-
-    onAdd({
-      title: title.trim(),
-      content: content.trim(),
-      status: 'pending'
-    });
 
     setTitle('');
     setContent('');
