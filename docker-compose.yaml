@@ -1,6 +1,24 @@
 version: '3.8'
 
 services:
+  client:
+    build:
+      context: client
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: always
+    
+  api:
+    build: 
+      context: server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+     - MONGO_URI=mongodb://admin:password123@localhost:27017/taskdb?authSource=admin
+     - PORT=3000
+
   mongodb:
     image: mongo:latest
     container_name: mongodb

@@ -18,7 +18,6 @@ export const useTasks = () => {
         
         setTasks(prev => [...prev, {
             ...newTask,
-            id: crypto.randomUUID()
           }]);
     }
     return sendTask()
